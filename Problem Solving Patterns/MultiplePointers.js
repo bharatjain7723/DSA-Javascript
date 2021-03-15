@@ -58,3 +58,66 @@ function countUniqueValues(arr){
     console.log(count)
     return count;
 }
+
+//********************************************************************************************* */
+
+// Frequency Counter / Multiple Pointers - areThereDuplicates
+// Implement a function called, areThereDuplicates which accepts a variable number of arguments, and checks whether there are any duplicates among the arguments passed in.  You can solve this using the frequency counter pattern OR the multiple pointers pattern.
+//
+// Examples:
+
+areThereDuplicates(1, 2, 3); // false
+areThereDuplicates(1, 2, 2); // true
+areThereDuplicates("a", "b", "c", "a"); // true
+
+// Restrictions:
+
+// Time - O(n log n)
+// Space - O(1)
+
+function areThereDuplicates(...arr) {
+    arr.sort((a,b)=> a > b); 
+    let start = 0;
+    let next = 1;
+
+    while(next < arr.length) {
+        if(args[start] === args[next]) return true;
+        start++;
+        next++;
+    }
+
+    return false;
+}
+
+// NOTE: There is a way to do this by frequency counter in Time and Space of O(n)
+
+/*****************************************************************************************************/
+
+// Multiple Pointers - isSubsequence
+// Write a function called isSubsequence which takes in two strings and checks whether the characters in the first string form a subsequence of the characters in the second string. In other words, the function should check whether the characters in the first string appear somewhere in the second string, without their order changing.
+
+// Examples:
+
+isSubsequence('hello', 'hello world'); // true
+isSubsequence('sing', 'sting'); // true
+isSubsequence('abc', 'abracadabra'); // true
+isSubsequence('abc', 'acb'); // false (order matters)
+
+// Your solution MUST have AT LEAST the following complexities:
+// Time Complexity - O(N + M)
+// Space Complexity - O(1)
+
+function isSubsequence(sub, str) {
+    if(sub.length === 0) return false;
+    
+    let i = 0; // index of str
+    let j = 0; // index of sub
+    while(i < str.length) {
+        if(str[i] === sub[j]) {
+            j++
+        }
+        i++;
+        if(j === sub.length) return true;
+    }
+    return false;
+  }
